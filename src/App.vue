@@ -65,10 +65,15 @@
     <br/>
     <!-- 注意：使用的是$event而不是event -->
     <button v-on:click="getEvent($event)">获取事件对象</button>
+    <hr/>
+    <br/>
+    <h1>TodoList</h1>
+    <v-home />
   </div>
 </template>
 
 <script>
+import TodoList from "./TodoList.vue";  // 引入组件
 export default {
   // name: 'hello',
   data () {
@@ -109,7 +114,9 @@ export default {
       alert(e.srcElement)
       e.srcElement.style.background = 'red'
     }
-  },
+  },components: {   // 注册组件
+    'v-home': TodoList,
+  }
 }
 </script>
 
