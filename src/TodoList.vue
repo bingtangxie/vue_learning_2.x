@@ -19,6 +19,7 @@
 </template>
 
 <script>
+import storage from "./utils/storage.js";
 export default {
   data() {
     return {
@@ -29,27 +30,25 @@ export default {
     addTodoList(){
       if (this.todo !== ''){
         this.list.push({"todo": this.todo, "status": 0})
-        localStorage.setItem('list', JSON.stringify(this.list))
+        storage.set('list', this.list)
       }
     },
     toFinish(index){
       this.list[index].status = 1
-      localStorage.setItem('list', JSON.stringify(this.list))
+      storage.set('list', this.list)
     },
     toUnFinish(index){
       this.list[index].status = 0
-      localStorage.setItem('list', JSON.stringify(this.list))
+      storage.set('list', this.list)
     },
     deleteFromList(index){
       this.list.splice(index, 1)
-      localStorage.setItem('list', JSON.stringify(this.list))
+      storage.set('list', this.list)
     }
   }, mounted() {
-    let list = JSON.parse(localStorage.getItem('list'))
-    if (list){
+    let list = storage.get('list')
       this.list = list
     }
-  }
 }
 </script>
 <style lang="scss">
