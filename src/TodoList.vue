@@ -1,18 +1,18 @@
 <template>
   <div id='todolist'>
-    <input type="text" v-model="item">
+    <input type="text" v-model="todo">
     <button v-on:click="addTodoList()">+增加</button>
     <hr/>
     <h2>待完成：</h2>
     <ul>
-      <li v-for="(value, index) in list_todo" v-bind:key="index">
-        {{ value }}<button @click="transToFinish(index)">已完成</button><button @click="deleteFromTodoList(index)">删除</button>
+      <li v-for="(item, index) in list" v-bind:key="index" v-if="item.status == 0">
+        {{ item.todo }}<button @click="toFinish(index)">已完成</button><button @click="deleteFromList(index)">删除</button>
       </li>
     </ul>
     <h2>已完成：</h2>
     <ul>
-      <li v-for="(value, index) in list_finish" v-bind:key="index">
-        {{ value }}<button @click="deleteFromListFinish(index)">删除</button>
+      <li v-for="(item, index) in list" v-bind:key="index" v-if="item.status == 1">
+        {{ item.todo }}<button @click="deleteFromList(index)">删除</button>
       </li>
     </ul>
   </div>
@@ -22,27 +22,20 @@
 export default {
   data() {
     return {
-      item: '',
-      list_todo: [],
-      list_finish: [],
+      todo: '',
+      list: [],
     }
   }, methods: {
     addTodoList(){
-      if (this.item !== ''){
-        console.log(this.item)
-        this.list_todo.push(this.item)
+      if (this.todo !== ''){
+        this.list.push({"todo": this.todo, "status": 0})
       }
     },
-    transToFinish(index){
-      let item_finish = this.list_todo[index]
-      this.list_todo.splice(index, 1)
-      this.list_finish.unshift(item_finish)
+    toFinish(index){
+      this.list[index].status = 1
     },
-    deleteFromTodoList(index){
-      this.list_todo.splice(index, 1)
-    },
-    deleteFromListFinish(index){
-      this.list_finish.splice(index, 1)
+    deleteFromList(index){
+      this.list.splice(index, 1)
     }
   }
 }
