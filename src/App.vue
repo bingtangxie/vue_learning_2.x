@@ -68,12 +68,18 @@
     <hr/>
     <br/>
     <h1>TodoList</h1>
+    <v-todo />
+    <!-- 组件传值 -->
+    <hr/>
+    <br/>
     <v-home />
   </div>
 </template>
 
 <script>
 import TodoList from "./TodoList.vue";  // 引入组件
+import Home from "./Home.vue";
+// console.log(Home)
 export default {
   // name: 'hello',
   data () {
@@ -115,7 +121,8 @@ export default {
       e.srcElement.style.background = 'red'
     }
   },components: {   // 注册组件
-    'v-home': TodoList,
+    'v-todo': TodoList,
+    'v-home': Home,
   }
 }
 </script>
