@@ -73,6 +73,12 @@
     <hr/>
     <br/>
     <v-home />
+    <!-- 路由 -->
+    <hr/>
+    <br/>
+    <h1> 路由演示 </h1>
+    <hr/>
+    <router-view></router-view>
   </div>
 </template>
 
