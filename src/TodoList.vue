@@ -20,6 +20,7 @@
 
 <script>
 import storage from "./utils/storage.js";
+import EmitEvent from "./utils/EmitEvent.js";
 export default {
   data() {
     return {
@@ -48,7 +49,12 @@ export default {
   }, mounted() {
     let list = storage.get('list')
       this.list = list
-    }
+    
+    EmitEvent.$on('toTodoList', function(data) {
+      console.log(data)
+      alert("我是Todolist组件， "+data)
+    })
+}
 }
 </script>
 <style lang="scss">

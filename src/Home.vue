@@ -1,6 +1,7 @@
 <template>
   <div id="home">
     {{ msg }} <button @click="getMsg()">获取子组件值</button>
+    <button @click="sendMsg()">给TodoList组件传值</button>
     <hr/>
     <br/>
     <v-header :header="HomeMsg" ref="header"/>
@@ -8,6 +9,7 @@
 </template>
 <script>
 import Header from './Header.vue';
+import EmitEvent from './utils/EmitEvent.js'
   export default {
     data() {
       return {
@@ -19,6 +21,9 @@ import Header from './Header.vue';
     }, methods: {
       getMsg(){
         alert(this.$refs.header.msg)
+      },
+      sendMsg(){
+        EmitEvent.$emit('toTodoList', this.HomeMsg)
       }
     }
   }
